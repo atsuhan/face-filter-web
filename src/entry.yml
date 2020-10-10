@@ -1,0 +1,3 @@
+ENTRY:
+  script.js: ./src/js/page/script.js
+  style.css: ./src/scss/page/style.scss

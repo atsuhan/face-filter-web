@@ -1,0 +1,13 @@
+extends /layout/_default-layout
+
+prepend config-block
+  - page_name = ''
+
+prepend stylesheet-block
+  link(rel="stylesheet" href='/style.css')
+
+prepend javascript-block
+  script(type="text/javascript" src="/script.js" defer)
+
+block content-block
+  canvas#myCanvas
