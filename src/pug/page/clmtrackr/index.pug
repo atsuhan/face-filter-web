@@ -1,0 +1,15 @@
+extends /layout/_default-layout
+
+prepend config-block
+  - page_name = 'clmtrackr'
+
+prepend stylesheet-block
+  link(rel="stylesheet" href='/clmtrackr/style.css')
+
+prepend javascript-block
+  script(type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/clmtrackr/1.1.2/clmtrackr.min.js")
+  script(type="text/javascript" src="/clmtrackr/script.js" defer)
+
+block content-block
+  video#video(autoplay)
+  canvas#canvas

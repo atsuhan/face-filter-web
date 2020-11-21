@@ -1,3 +1,6 @@
 ENTRY:
   script.js: ./src/js/page/script.js
   style.css: ./src/scss/page/style.scss
+
+  clmtrackr/script.js: ./src/js/page/clmtrackr/script.js
+  clmtrackr/style.css: ./src/scss/page/clmtrackr/style.scss
