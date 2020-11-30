@@ -1,0 +1,36 @@
+extends /layout/_default-layout
+
+prepend config-block
+  - page_name = 'DeepAR'
+
+prepend stylesheet-block
+  link(rel="stylesheet" href='/deepar/style.css')
+
+prepend javascript-block
+  script(type='text/javascript' src='//code.jquery.com/jquery-1.11.0.min.js')
+  script(type='text/javascript' src='//code.jquery.com/jquery-migrate-1.2.1.min.js')
+  script(type='text/javascript' src='//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js')
+  script(type='text/javascript' src='/lib/deepar/deepar.js')
+  script(type='text/javascript' src='/deepar/script.js')
+
+block content-block
+  canvas#deepar-canvas.deepar(oncontextmenu='event.preventDefault()')
+  #loader-wrapper
+    span.loader
+  .effect-carousel
+    div
+      img.thumb(src='/img/deepar/galaxy.png')
+    div
+      img.thumb(src='/img/deepar/aviators.png')
+    div
+      img.thumb(src='/img/deepar/beard.png')
+    div
+      img.thumb(src='/img/deepar/dalmatian.png')
+    div
+      img.thumb(src='/img/deepar/flowers.png')
+    div
+      img.thumb(src='/img/deepar/koala.png')
+    div
+      img.thumb(src='/img/deepar/lion.png')
+    div
+      img.thumb(src='/img/deepar/teddy_cigar.png')

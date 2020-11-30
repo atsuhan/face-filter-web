@@ -4,3 +4,6 @@ ENTRY:
 
   clmtrackr/script.js: ./src/js/page/clmtrackr/script.js
   clmtrackr/style.css: ./src/scss/page/clmtrackr/style.scss
+
+  deepar/script.js: ./src/js/page/deepar/script.js
+  deepar/style.css: ./src/scss/page/deepar/style.scss
