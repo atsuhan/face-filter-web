@@ -1,3 +1,7 @@
+import Swiper, { Navigation, Pagination } from 'swiper';
+Swiper.use([Navigation, Pagination]);
+import 'swiper/swiper-bundle.css';
+
 // DeepAR constants
 const DEEPAR_LICENSE_KEY =
   'c2e4647f8b20cf32b6e9b87d8f66325bc4d8ab5cc622296e86b014bca9a58eaa2f716aa3327f6d0f';
@@ -57,21 +61,24 @@ if (isWideView) {
   carousel.style.marginLeft = (window.innerWidth - canvasWidth) / 2 + 'px';
 }
 
-$(document).ready(() => {
-  $('.effect-carousel').slick({
-    slidesToShow: 1,
-    centerMode: true,
-    focusOnSelect: true,
-    arrows: true,
-    accessibility: false,
-    variableWidth: true
-  });
+const swiper = new Swiper('.swiper-container', {
+  slidesPerView: 4,
+  spaceBetween: 30,
+  centeredSlides: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  }
+});
+swiper.init();
 
-  $('.effect-carousel').on('afterChange', (event, slick, currentSlide) => {
-    deepAR.switchEffect(0, 'slot', DEEPAR_EFFECTS[currentSlide]);
-  });
+swiper.on('slideChange', () => {
+  deepAR.switchEffect(0, 'slot', DEEPAR_EFFECTS[swiper.realIndex]);
 });
 
+swiper.on('tap', (event) => {
+  swiper.slideTo(event.clickedIndex, 500, true);
+});
 
 // Reference
 /*
