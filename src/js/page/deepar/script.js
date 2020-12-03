@@ -1,8 +1,5 @@
-// import Swiper, { Navigation, Pagination } from 'swiper';
-// Swiper.use([Navigation, Pagination]);
-// import 'swiper/swiper-bundle.css';
-
 import DeepARController from '../../lib/DeepARController';
+//import Swiper from 'swiper';
 
 const DEEPAR_OPTION = {
   licenseKey:
@@ -13,55 +10,55 @@ const DEEPAR_OPTION = {
   numberOfFaces: 1
 };
 
-// canvas
-let isWideView = window.innerWidth > window.innerHeight;
+// elements
 let canvasEl = document.querySelector('#deepar-canvas');
-let canvasHeight = window.innerHeight;
-let canvasWidth = isWideView
+let carouselEl = document.querySelector('.effect-carousel');
+let loaderWrapperEl = document.getElementById('loader-wrapper');
+
+// effect size
+let isWideView = window.innerWidth > window.innerHeight;
+let effectHeight = window.innerHeight;
+let effectWidth = isWideView
   ? Math.floor(window.innerHeight * 0.66)
   : window.innerWidth;
 
 // deepAR
 let deepARController = new DeepARController(
   canvasEl,
-  canvasWidth,
-  canvasHeight,
+  effectWidth,
+  effectHeight,
   DEEPAR_OPTION
 );
-deepARController.init();
-
 deepARController.SetVideoStartedEvent(() => {
-  let loaderWrapper = document.getElementById('loader-wrapper');
-  loaderWrapper.style.display = 'none';
+  loaderWrapperEl.style.display = 'none';
 });
-
 deepARController.downloadFaceTrackingModel('/lib/deepar/models-68-extreme.bin');
 
-// carousel
-// if (isWideView) {
-//   let carousel = document.querySelector('.effect-carousel');
-//   carousel.style.width = canvasWidth + 'px';
-//   carousel.style.marginLeft = (window.innerWidth - canvasWidth) / 2 + 'px';
-// }
+// carousel view
+if (isWideView) {
+  carouselEl.style.width = effectWidth + 'px';
+  carouselEl.style.marginLeft = (window.innerWidth - effectWidth) / 2 + 'px';
+}
 
-// const swiper = new Swiper('.swiper-container', {
-//   slidesPerView: 4,
-//   spaceBetween: 30,
-//   centeredSlides: true,
-//   pagination: {
-//     el: '.swiper-pagination',
-//     clickable: true
-//   }
-// });
-// swiper.init();
+// swiper
+const swiper = new Swiper('.swiper-container', {
+  slidesPerView: 4,
+  spaceBetween: 30,
+  centeredSlides: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true
+  }
+});
+swiper.init();
 
-// swiper.on('slideChange', () => {
-//   deepAR.switchEffect(0, 'slot', DEEPAR_EFFECTS[swiper.realIndex]);
-// });
+swiper.on('slideChange', () => {
+  deepARController.switchEffect(swiper.realIndex);
+});
 
-// swiper.on('tap', event => {
-//   swiper.slideTo(event.clickedIndex, 500, true);
-// });
+swiper.on('tap', event => {
+  swiper.slideTo(event.clickedIndex, 500, true);
+});
 
 // Reference
 /*

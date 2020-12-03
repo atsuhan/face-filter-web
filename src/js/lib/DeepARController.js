@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 const DEFAULT_OPTION = {
   licenseKey:
-    'c2e4647f8b20cf32b6e9b87d8f66325bc4d8ab5cc622296e86b014bca9a58eaa2f716aa3327f6d0f',
+    'bbdd2f6213fe94acddaf4b74d2b2d0c5779098c613736b61c7e05264a7b156322906a9fea6da4445',
   effectPaths: [
     '/lib/deepar/effects/samples/background_segmentation',
     '/lib/deepar/effects/samples/aviators',
@@ -15,23 +15,21 @@ const DEFAULT_OPTION = {
   ],
   libPath: '/lib/deepar/',
   segmentationFileName: 'segmentation.zip',
-  numberOfFaces: 1
+  numberOfFaces: 1,
+  width: null,
+  height: null
 };
 
 export default class DeepARController {
-  constructor(canvasEl, canvasWidth, canvasHeight, option = null) {
+  constructor(canvasEl, width, height, option = null) {
     this.canvasEl = canvasEl;
-    this.canvasWidth = canvasWidth;
-    this.canvasHeight = canvasHeight;
+    this.width = width;
+    this.height = height;
     this.option = _.assign(DEFAULT_OPTION, option);
 
-    this.deepAR = null;
-  }
-
-  init() {
     this.deepAR = DeepAR({
-      canvasWidth: this.canvasWidth,
-      canvasHeight: this.canvasHeight,
+      canvasWidth: this.width,
+      canvasHeight: this.height,
       licenseKey: this.option.licenseKey,
       canvas: this.canvasEl,
       numberOfFaces: this.option.numberOfFaces,
@@ -58,5 +56,9 @@ export default class DeepARController {
   setSize(width, height) {
     this.videoEl.width = width;
     this.videoEl.height = height;
+  }
+
+  switchEffect(effectIndex) {
+    this.deepAR.switchEffect(0, 'slot', DEEPAR_EFFECTS[effectIndex]);
   }
 }
