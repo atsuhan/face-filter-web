@@ -7,3 +7,6 @@ ENTRY:
 
   deepar/script.js: ./src/js/page/deepar/script.js
   deepar/style.css: ./src/scss/page/deepar/style.scss
+  
+  deepar/moripearl/script.js: ./src/js/page/deepar/moripearl/script.js
+  deepar/moripearl/style.css: ./src/scss/page/deepar/moripearl/style.scss

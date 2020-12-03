@@ -44,7 +44,7 @@
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-prettier": "^1.0.6",
     "stylelint-scss": "^3.5.4",
-    "swiper": "^6.3.5",
+    "swiper": "^4.4.6",
     "three": "^0.121.1",
     "webpack": "^4.4.1",
     "webpack-cli": "^3.1.2",
