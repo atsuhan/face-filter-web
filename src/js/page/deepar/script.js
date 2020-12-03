@@ -1,23 +1,17 @@
-import Swiper, { Navigation, Pagination } from 'swiper';
-Swiper.use([Navigation, Pagination]);
-import 'swiper/swiper-bundle.css';
+// import Swiper, { Navigation, Pagination } from 'swiper';
+// Swiper.use([Navigation, Pagination]);
+// import 'swiper/swiper-bundle.css';
 
-// DeepAR constants
-const DEEPAR_LICENSE_KEY =
-  'c2e4647f8b20cf32b6e9b87d8f66325bc4d8ab5cc622296e86b014bca9a58eaa2f716aa3327f6d0f';
-const DEEPAR_EFFECTS = [
-  '/lib/deepar/effects/background_segmentation',
-  '/lib/deepar/effects/aviators',
-  '/lib/deepar/effects/beard',
-  '/lib/deepar/effects/dalmatian',
-  '/lib/deepar/effects/flowers',
-  '/lib/deepar/effects/koala',
-  '/lib/deepar/effects/lion',
-  '/lib/deepar/effects/teddycigar'
-];
-const DEEPAR_LIB_PATH = '/lib/deepar/';
-const SEGMENTATION_INFO_ZIP_FILENAME = 'segmentation.zip';
-const NUMBER_OF_FACE = 1;
+import DeepARController from '../../lib/DeepARController';
+
+const DEEPAR_OPTION = {
+  licenseKey:
+    'bbdd2f6213fe94acddaf4b74d2b2d0c5779098c613736b61c7e05264a7b156322906a9fea6da4445',
+  effectPaths: ['/lib/deepar/effects/earring_fbx'],
+  libPath: '/lib/deepar/',
+  segmentationFileName: 'segmentation.zip',
+  numberOfFaces: 1
+};
 
 // canvas
 let isWideView = window.innerWidth > window.innerHeight;
@@ -28,57 +22,46 @@ let canvasWidth = isWideView
   : window.innerWidth;
 
 // deepAR
-let deepAR = DeepAR({
-  canvasWidth: canvasWidth,
-  canvasHeight: canvasHeight,
-  licenseKey: DEEPAR_LICENSE_KEY,
-  canvas: canvasEl,
-  numberOfFaces: NUMBER_OF_FACE,
-  libPath: DEEPAR_LIB_PATH,
-  segmentationInfoZip: SEGMENTATION_INFO_ZIP_FILENAME,
-  onInitialize: () => {
-    // start video immediately after the initalization, mirror = true
-    deepAR.startVideo(true);
+let deepARController = new DeepARController(
+  canvasEl,
+  canvasWidth,
+  canvasHeight,
+  DEEPAR_OPTION
+);
+deepARController.init();
 
-    // or we can setup the video element externally and call deepAR.setVideoElement (see startExternalVideo function below)
-    deepAR.switchEffect(0, 'slot', DEEPAR_EFFECTS[0], () => {
-      // effect loaded
-    });
-  }
-});
-
-deepAR.onVideoStarted = () => {
+deepARController.SetVideoStartedEvent(() => {
   let loaderWrapper = document.getElementById('loader-wrapper');
   loaderWrapper.style.display = 'none';
-};
+});
 
-deepAR.downloadFaceTrackingModel('/lib/deepar/models-68-extreme.bin');
+deepARController.downloadFaceTrackingModel('/lib/deepar/models-68-extreme.bin');
 
 // carousel
-if (isWideView) {
-  let carousel = document.querySelector('.effect-carousel');
-  carousel.style.width = canvasWidth + 'px';
-  carousel.style.marginLeft = (window.innerWidth - canvasWidth) / 2 + 'px';
-}
+// if (isWideView) {
+//   let carousel = document.querySelector('.effect-carousel');
+//   carousel.style.width = canvasWidth + 'px';
+//   carousel.style.marginLeft = (window.innerWidth - canvasWidth) / 2 + 'px';
+// }
 
-const swiper = new Swiper('.swiper-container', {
-  slidesPerView: 4,
-  spaceBetween: 30,
-  centeredSlides: true,
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true
-  }
-});
-swiper.init();
+// const swiper = new Swiper('.swiper-container', {
+//   slidesPerView: 4,
+//   spaceBetween: 30,
+//   centeredSlides: true,
+//   pagination: {
+//     el: '.swiper-pagination',
+//     clickable: true
+//   }
+// });
+// swiper.init();
 
-swiper.on('slideChange', () => {
-  deepAR.switchEffect(0, 'slot', DEEPAR_EFFECTS[swiper.realIndex]);
-});
+// swiper.on('slideChange', () => {
+//   deepAR.switchEffect(0, 'slot', DEEPAR_EFFECTS[swiper.realIndex]);
+// });
 
-swiper.on('tap', (event) => {
-  swiper.slideTo(event.clickedIndex, 500, true);
-});
+// swiper.on('tap', event => {
+//   swiper.slideTo(event.clickedIndex, 500, true);
+// });
 
 // Reference
 /*
