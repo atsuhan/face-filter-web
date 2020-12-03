@@ -1,4 +1,12 @@
-import DeepARController from '../../lib/DeepARController';
+import DeepARController from '@/lib/DeepARController';
+
+const DEEPAR_OPTION = {
+  effectPaths: [
+    '/lib/deepar/effects/moripearl/earring_tex',
+    '/lib/deepar/effects/moripearl/earring_fbx',
+    '/lib/deepar/effects/moripearl/neckrace'
+  ]
+};
 
 // elements
 let canvasEl = document.querySelector('#deepar-canvas');
@@ -16,7 +24,8 @@ let effectWidth = isWideView
 let deepARController = new DeepARController(
   canvasEl,
   effectWidth,
-  effectHeight
+  effectHeight,
+  DEEPAR_OPTION
 );
 deepARController.SetVideoStartedEvent(() => {
   loaderWrapperEl.style.display = 'none';

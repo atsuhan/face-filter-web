@@ -1,0 +1,31 @@
+extends /layout/_default-layout
+
+prepend config-block
+  - page_name = 'DeepAR'
+
+prepend stylesheet-block
+  link(rel="stylesheet" href='/deepar/style.css')
+  link(rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css")
+
+prepend javascript-block
+  script(src="https://unpkg.com/swiper/swiper-bundle.js")
+  script(type='text/javascript' src='/lib/deepar/deepar.js')
+  script(type='text/javascript' src='/deepar/moripearl/script.js')
+
+block content-block
+  canvas#deepar-canvas.deepar(oncontextmenu='event.preventDefault()')
+  #loader-wrapper
+    span.loader
+
+  // Carousel
+  .swiper-wrapper
+    .swiper
+      .swiper-container
+        .swiper-wrapper
+          .swiper-slide
+            img.swiper-slide-thumb(src='/img/deepar/moripearl/earring.png')
+          .swiper-slide
+            img.swiper-slide-thumb(src='/img/deepar/moripearl/earring.png')
+          .swiper-slide
+            img.swiper-slide-thumb(src='/img/deepar/moripearl/neckrace.png')
+      .swiper-pagination
