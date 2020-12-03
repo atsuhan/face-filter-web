@@ -59,16 +59,11 @@ export default class DeepARController {
   }
 
   GetTargetKey() {
-    console.log(location.host);
-    const targetKeyData = _.findIndex(this.option.licenseKeys, data => {
+    const targetIndex = _.findIndex(this.option.licenseKeys, data => {
       return data.host === location.hostname;
     });
 
-    if (!targetKeyData) {
-      return this.option.licenseKeys[0].key;
-    }
-
-    return targetKeyData.key;
+    return this.option.licenseKeys[targetIndex].key;
   }
 
   SetVideoStartedEvent(callback) {
