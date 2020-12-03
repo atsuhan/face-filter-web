@@ -10,7 +10,7 @@ const DEFAULT_OPTION = {
     {
       host: 'facefilterdemo.netlify.app',
       key:
-        '51a54e39674ec8a80dbc9a5ede8958b1a17cc7f7969e7d8664c3221b084af64ee448402013be235a'
+        '0d733c66bbb67c716e9d8ba7a2c675c23377efb36e20f9ce9f3df0fe56b5bb4a05e58e032200b800'
     }
   ],
   effectPaths: [
