@@ -1,6 +1,7 @@
 {
   "hosting": {
     "public": "public",
+    "site": "facefilterdemo-5ab12",
     "ignore": [
       "firebase.json",
       "**/.*",
