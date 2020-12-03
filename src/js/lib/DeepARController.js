@@ -1,8 +1,18 @@
 import _ from 'lodash';
 
 const DEFAULT_OPTION = {
-  licenseKey:
-    'bbdd2f6213fe94acddaf4b74d2b2d0c5779098c613736b61c7e05264a7b156322906a9fea6da4445',
+  licenseKeys: [
+    {
+      host: 'localhost',
+      key:
+        'bbdd2f6213fe94acddaf4b74d2b2d0c5779098c613736b61c7e05264a7b156322906a9fea6da4445'
+    },
+    {
+      host: 'facefilterdemo.netlify.app',
+      key:
+        '51a54e39674ec8a80dbc9a5ede8958b1a17cc7f7969e7d8664c3221b084af64ee448402013be235a'
+    }
+  ],
   effectPaths: [
     '/lib/deepar/effects/samples/background_segmentation',
     '/lib/deepar/effects/samples/aviators',
@@ -27,10 +37,13 @@ export default class DeepARController {
     this.height = height;
     this.option = _.assign(DEFAULT_OPTION, option);
 
+    this.key = this.GetTargetKey();
+    console.log(this.key);
+
     this.deepAR = DeepAR({
       canvasWidth: this.width,
       canvasHeight: this.height,
-      licenseKey: this.option.licenseKey,
+      licenseKey: this.key,
       canvas: this.canvasEl,
       numberOfFaces: this.option.numberOfFaces,
       libPath: this.option.libPath,
@@ -43,6 +56,19 @@ export default class DeepARController {
         });
       }
     });
+  }
+
+  GetTargetKey() {
+    console.log(location.host);
+    const targetKeyData = _.findIndex(this.option.licenseKeys, data => {
+      return data.host === location.hostname;
+    });
+
+    if (!targetKeyData) {
+      return this.option.licenseKeys[0].key;
+    }
+
+    return targetKeyData.key;
   }
 
   SetVideoStartedEvent(callback) {
