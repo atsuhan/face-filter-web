@@ -4,7 +4,8 @@ const DEEPAR_OPTION = {
   effectPaths: [
     '/lib/deepar/effects/moripearl/earring_tex',
     '/lib/deepar/effects/moripearl/earring_fbx',
-    '/lib/deepar/effects/moripearl/neckrace'
+    '/lib/deepar/effects/moripearl/neckrace01',
+    '/lib/deepar/effects/moripearl/neckrace02'
   ]
 };
 
