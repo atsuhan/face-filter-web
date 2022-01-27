@@ -45,7 +45,7 @@
     "stylelint-prettier": "^1.0.6",
     "stylelint-scss": "^3.5.4",
     "swiper": "^4.4.6",
-    "three": "^0.121.1",
+    "three": "^0.137.0",
     "webpack": "^4.4.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.11.0",
